@@ -31,6 +31,11 @@ export default {
     .page-title {
         color: $primary;
         text-decoration: none;
+
+        &:hover {
+            transition: 2s ease;
+            color: #b10911;
+        }
     }
 
     .search-bar {
