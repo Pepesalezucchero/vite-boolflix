@@ -1,10 +1,12 @@
 <script>
 //importo componenti
 import AppHeader from './components/AppHeader.vue'
+import AppMain from './components/AppMain.vue'
 
 export default {
   components: {
-    AppHeader
+    AppHeader,
+    AppMain
   }
 }
 </script>
@@ -13,10 +15,16 @@ export default {
 
   <!-- intestazione pagina con logo e titolo -->
   <header>
-    <AppHeader />
+    <nav>
+      <AppHeader />
+    </nav>
   </header>
   <!-- contenuto principale della pagina -->
   <main>
+    <!-- sezione contenuti-->
+    <section>
+      <AppMain />
+    </section>
 
   </main>
 

@@ -5,8 +5,8 @@ export default {
 </script>
 
 <template>
-    <!-- intestazione pagina con logo e titolo -->
-    <div class="header-container">
+    <!-- intestazione pagina con logo e ricerca di contenuti -->
+    <div class="nav-container">
         <a class="page-title" href="#"><h1>BOOLFIX</h1></a>
         <div class="search-container">
             <input class="search-bar" type="text" placeholder="Ricerca Contenuti">
@@ -18,7 +18,7 @@ export default {
 <style lang="scss" scoped>
 @use '../styles/partials/variables' as *;
 
-.header-container {
+.nav-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -35,6 +35,10 @@ export default {
         &:hover {
             transition: 2s ease;
             color: #b10911;
+        }
+
+        h1 {
+            font-size: 40px;
         }
     }
 
