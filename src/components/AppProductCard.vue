@@ -13,6 +13,11 @@ export default {
             store,
         }
     },
+    methods: {
+        rating(number) {
+            return Math.ceil(number);
+        }
+    }
 }
 </script>
 
@@ -34,7 +39,10 @@ export default {
             <div class="flag">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/400px-Flag_of_Italy.svg.png" alt="">
             </div>
-            <h1 class="rating">stelle</h1>
+            <div class="rating">
+                <span v-for="number in this.rating(movieOrSeries.vote_average / 2)"><i class="fa-solid fa-star" style="color: #ffffff;"></i></span>
+                <span v-for="number in (5 - this.rating(movieOrSeries.vote_average / 2))"><i class="fa-regular fa-star" style="color: #ffffff;"></i></span>
+            </div>
             <p class="overview">Trama: {{ movieOrSeries.overview }}</p>
         </div>
     </div>
@@ -54,7 +62,6 @@ export default {
 
     .card_side {
         width: 100%;
-        
         overflow: hidden;
         border-radius: 3px;
         border: 2px solid $quaternary;
