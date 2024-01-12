@@ -1,44 +1,41 @@
 <script>
+//Importo lo store
+import { store } from '../store';
+
 export default {
     name: 'AppProductCard',
+    props: {
+        info: Object,
+        myImg: String
+    },
+    data() {
+        return {
+            store,
+        }
+    },
 }
 </script>
 
 <template>
-    <h1 class="section-title">Film</h1>
-    <div class="container-film">
-        <div class="card-container">
-            <div class="card-side front">
-                <img class="cover-img" src="../../public/tyrtyrtyrtyrtyrtyr.jpg" alt="">
-            </div>
+    <div class="card-container">
+        <!-- cover davanti-->
+        <div class="card-side front">
+            <img class="cover-img" v-if="info.poster_path !== null" :src="myImg + info.poster_path" :alt="info.original_title || info.original_name">
 
-            <div class="card_side back">
-                <h2 class="product-title">ciao!</h2>
-                <h3 class="product-original-title">ciao!ertert</h3>
-                <div class="flag">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/400px-Flag_of_Italy.svg.png" alt="">
-                </div>
-                <h1 class="rating">stelle</h1>
-                <p class="overview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate illo quis natus temporibus dolores molestias ex, corporis quas, recusandae omnis adipisci deserunt aliquam fugiat, odit odio! Minima similique ut voluptas. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa dignissimos exercitationem eveniet eius odit libero asperiores quae dolore explicabo corporis ea recusandae assumenda minima repudiandae voluptas culpa, quasi adipisci dolor.</p>
+            <!-- in caso di mancata immagine di copertina -->
+            <div v-else="info.poster_path === null">
+                <h1>No Cover</h1> {{ info.title || info.name }}
             </div>
         </div>
-    </div>
-    <h1 class="section-title">Serie TV</h1>
-    <div class="container-series">
-        <div class="card-container">
-            <div class="card-side front">
-                <img class="cover-img" src="../../public/tyrtyrtyrtyrtyrtyr.jpg" alt="">
+        <!-- informazioni dietro-->
+        <div class="card_side back">
+            <h2 class="product-title">ciao!</h2>
+            <h3 class="product-original-title">ciao!ertert</h3>
+            <div class="flag">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/400px-Flag_of_Italy.svg.png" alt="">
             </div>
-
-            <div class="card_side back">
-                <h2 class="product-title">ciao!</h2>
-                <h3 class="product-original-title">ciao!ertert</h3>
-                <div class="flag">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/400px-Flag_of_Italy.svg.png" alt="">
-                </div>
-                <h1 class="rating">stelle</h1>
-                <p class="overview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate illo quis natus temporibus dolores molestias ex, corporis quas, recusandae omnis adipisci deserunt aliquam fugiat, odit odio! Minima similique ut voluptas. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa dignissimos exercitationem eveniet eius odit libero asperiores quae dolore explicabo corporis ea recusandae assumenda minima repudiandae voluptas culpa, quasi adipisci dolor.</p>
-            </div>
+            <h1 class="rating">stelle</h1>
+            <p class="overview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate illo quis natus temporibus dolores molestias ex, corporis quas, recusandae omnis adipisci deserunt aliquam fugiat, odit odio! Minima similique ut voluptas. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa dignissimos exercitationem eveniet eius odit libero asperiores quae dolore explicabo corporis ea recusandae assumenda minima repudiandae voluptas culpa, quasi adipisci dolor.</p>
         </div>
     </div>
 </template>
@@ -46,23 +43,11 @@ export default {
 <style lang="scss" scoped>
 @use '../styles/partials/variables' as *;
 
-.container-series, .container-film {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-.section-title {
-    color: $tertiary;
-    padding: 20px 0;
-    margin-left: 5px;
-    font-size: 30px;
-}
 .card-container {
+    background-color: $quaternary;
     width: calc((100% / 4) - 20px);
     margin: 10px 0;
     cursor: pointer;
-    height: 100%;
     perspective: 1000px;
 
     .card_side {

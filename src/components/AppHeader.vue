@@ -1,6 +1,14 @@
 <script>
+//Importo lo store
+import { store } from '../store';
+
 export default {
     name: 'AppHeader',
+    data() {
+        return {
+            store,
+        }
+    }
 }
 </script>
 
@@ -9,8 +17,8 @@ export default {
     <div class="nav-container">
         <a class="page-title" href="#"><h1>BOOLFIX</h1></a>
         <div class="search-container">
-            <input class="search-bar" type="text" placeholder="Ricerca Contenuti">
-            <button class="btn">Vai <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i></button>
+            <input class="search-bar" type="text" placeholder="Ricerca Contenuti" @keydown.enter="$emit('search')" v-model="store.searchText">
+            <button class="btn" @click="$emit('search')">Vai <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i></button>
         </div>
     </div>
 </template>
