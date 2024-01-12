@@ -11,9 +11,20 @@ export default {
     data() {
         return {
             store,
+            //lista di bandiere specifiche usate
+            flags: {
+                it: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/1920px-Flag_of_Italy.svg.png',
+                en: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/1920px-Flag_of_the_United_Kingdom_%281-2%29.svg.png',
+                es: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Bandera_de_Espa%C3%B1a.svg/1920px-Bandera_de_Espa%C3%B1a.svg.png',
+                fr: 'https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg',
+                de: 'https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg',
+                ja: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1024px-Flag_of_Japan.svg.png',
+                zh: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg'
+            }
         }
     },
     methods: {
+        //funzione per far tornare i numeri interi per eccesso
         rating(number) {
             return Math.ceil(number);
         }
@@ -36,10 +47,15 @@ export default {
         <div class="card_side back">
             <h2 class="product-title">Titolo: {{ movieOrSeries.title || movieOrSeries.name }}</h2>
             <h3 class="product-original-title">Titolo originale: {{ movieOrSeries.original_title || movieOrSeries.original_name }}</h3>
+            <!-- bandiere -->
             <div class="flag">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/400px-Flag_of_Italy.svg.png" alt="">
+                <!-- bandiera specifica -->
+                <img class="flag" v-if="flags[movieOrSeries.original_language]" :src="flags[movieOrSeries.original_language]"/>
+                <!-- bandiera generica -->
+                <img v-else="" src="https://flag-designer.appspot.com/gwtflags/SvgFileService?d=5&c1=1&c2=3&c3=7&o=6&c4=7&s=0&c5=4" alt="bandiera generica">
             </div>
             <div class="rating">
+                <!-- ciclo che in base al numero ottenuto mette le stelle piene e vuote -->
                 <span v-for="number in this.rating(movieOrSeries.vote_average / 2)"><i class="fa-solid fa-star" style="color: #ffffff;"></i></span>
                 <span v-for="number in (5 - this.rating(movieOrSeries.vote_average / 2))"><i class="fa-regular fa-star" style="color: #ffffff;"></i></span>
             </div>
