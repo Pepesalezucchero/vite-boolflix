@@ -67,6 +67,10 @@ export default {
         border: 2px solid $quaternary;
     }
 
+    .front {
+        height: 100%;
+    }
+
     .back {
         transform: rotateY(180deg);
         position: absolute;
@@ -86,9 +90,11 @@ export default {
 }
 
 .cover-img {
+    height: 100%;
     width: 100%;
     border-radius: 3px;
     border: 2px solid $quaternary;
+    object-fit: cover;
 
     &:hover {
         transition: 0.25s ease-in-out;
