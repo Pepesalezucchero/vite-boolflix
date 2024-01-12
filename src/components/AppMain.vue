@@ -27,14 +27,14 @@ export default {
                 <section v-if="store.movieList.length !== 0">
                     <h1 class="section-title">Film</h1>
                     <div class="container-film">
-                        <AppProductCard v-for="movie in store.movieList" :key="movie.id" :info="movie" :myImg="store.posterUrl" />
+                        <AppProductCard v-for="movie in store.movieList" :key="movie.id" :movieOrSeries="movie" :myUrlImg="store.posterUrl" />
                     </div>
                 </section>
                 <!-- sezione serie tv -->
                 <section v-if="store.seriesList.length !== 0">
                     <h1 class="section-title">Serie TV</h1>
                     <div class="container-series">
-                        <AppProductCard v-for="series in store.seriesList" :key="series.id" :info="series" :myImg="store.posterUrl" />
+                        <AppProductCard v-for="series in store.seriesList" :key="series.id" :movieOrSeries="series" :myUrlImg="store.posterUrl" />
                     </div>
                 </section> 
             </div>
@@ -51,7 +51,7 @@ export default {
 }
 
 .central-content {
-    width: 90%;
+    width: 80%;
     margin: 20px auto;
     border-radius: 8px;
 }

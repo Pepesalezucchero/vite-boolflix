@@ -5,8 +5,8 @@ import { store } from '../store';
 export default {
     name: 'AppProductCard',
     props: {
-        info: Object,
-        myImg: String
+        movieOrSeries: Object,
+        myUrlImg: String
     },
     data() {
         return {
@@ -20,22 +20,22 @@ export default {
     <div class="card-container">
         <!-- cover davanti-->
         <div class="card-side front">
-            <img class="cover-img" v-if="info.poster_path !== null" :src="myImg + info.poster_path" :alt="info.original_title || info.original_name">
+            <img class="cover-img" v-if="movieOrSeries.poster_path !== null" :src="myUrlImg + movieOrSeries.poster_path" :alt="movieOrSeries.original_title || movieOrSeries.original_name">
 
             <!-- in caso di mancata immagine di copertina -->
-            <div v-else="info.poster_path === null">
-                <h1>No Cover</h1> {{ info.title || info.name }}
+            <div v-else="movieOrSeries.poster_path === null">
+                <h1 class="cover-not-found">{{ movieOrSeries.title || movieOrSeries.name }}</h1>
             </div>
         </div>
         <!-- informazioni dietro-->
         <div class="card_side back">
-            <h2 class="product-title">ciao!</h2>
-            <h3 class="product-original-title">ciao!ertert</h3>
+            <h2 class="product-title">Titolo: {{ movieOrSeries.title || movieOrSeries.name }}</h2>
+            <h3 class="product-original-title">Titolo originale: {{ movieOrSeries.original_title || movieOrSeries.original_name }}</h3>
             <div class="flag">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/400px-Flag_of_Italy.svg.png" alt="">
             </div>
             <h1 class="rating">stelle</h1>
-            <p class="overview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate illo quis natus temporibus dolores molestias ex, corporis quas, recusandae omnis adipisci deserunt aliquam fugiat, odit odio! Minima similique ut voluptas. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa dignissimos exercitationem eveniet eius odit libero asperiores quae dolore explicabo corporis ea recusandae assumenda minima repudiandae voluptas culpa, quasi adipisci dolor.</p>
+            <p class="overview">Trama: {{ movieOrSeries.overview }}</p>
         </div>
     </div>
 </template>
@@ -44,7 +44,9 @@ export default {
 @use '../styles/partials/variables' as *;
 
 .card-container {
-    background-color: $quaternary;
+    background-image: url(../../public/no-cover-img.jpg);
+    background-size: cover;
+    background-position: center;
     width: calc((100% / 4) - 20px);
     margin: 10px 0;
     cursor: pointer;
@@ -52,7 +54,7 @@ export default {
 
     .card_side {
         width: 100%;
-        height: 100%;
+        
         overflow: hidden;
         border-radius: 3px;
         border: 2px solid $quaternary;
@@ -102,7 +104,9 @@ export default {
     margin: 15px 0;
 }
 
-p {
-    color: white;
+.cover-not-found {
+    text-align: center;
+    color: $tertiary;
+    margin-top: 40px;
 }
 </style>
